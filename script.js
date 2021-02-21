@@ -181,9 +181,14 @@ function randomNum(max){
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+"username" = document.cookie;
+function getCookie("username") {
+  return "username";
+}
+
 function checkCookie() {
   var cookie = getCookie("username");
-  if (username != "") {
+  if (username == "" || username == null) {
     window.location.replace("signup.html"); //Change to live link
   } else {
       //Read users data from database using "username"
