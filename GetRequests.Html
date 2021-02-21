@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title> Jokes API Test </title>
+    <script>
+          function getJoke (firstName, lastName){
+           //http://api.icndb.com/jokes/random
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+              if(this.readyState == 4 && this.status == 200)
+              {
+                //Response is recieved!
+               var JokeObj = JSON.parse(this.responseText);
+               document.getElementById("JokesDiv").innerHTML = JokeObj.value.joke;
+              }
+
+          };
+
+          xhttp.open("GET" , "http://api.icndb.com/jokes/random?firstName="+ firstName + "&lastName=" + lastName);
+          xhttp.send();
+
+      }
+    </script>
+
+  </head>
+  <body>
+    <button onclick ="getJoke('Bassel','Tech')">Click to Load a Joke</button><br>
+    <h2>Joke:</h2>
+    <div id="JokesDiv"></div>
+  </body>
+
+</html>

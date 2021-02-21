@@ -1,0 +1,20 @@
+*{
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #333
+  color:#fff;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Helvetica;
+  min-height: 100vh;
+   margin: 0;
+}
+#canvas {
+top:100px;
+background: ##ff0000;
+border-radius: 5px;
+}
