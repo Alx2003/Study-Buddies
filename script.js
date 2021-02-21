@@ -20,7 +20,9 @@ var mouse = {x:0,y:0};
 recieveMessage({text:"Goo goo gaa gaa",sender:"Fahim"});
 recieveMessage({text:"booga wooga",sender:"Fahim"});
 recieveMessage({text:"swigga",sender:"Fahim"});
-recieveMessage({text:"Test",sender:"Fahim"});
+recieveMessage({text:"Test",sender:"Fahim"});\
+
+
 
 // Initialize Firebase  **************WRITTING INTO THE DATABASE********************
 firebase.initializeApp(firebaseConfig);
@@ -36,9 +38,6 @@ document.addEventListener('keydown', function (event){
 
     box.style.left = 0+"px";
     box.style.top = 0+"px";
-  }
-  else if (event.keyCode == 78){
-    var image = createProfile({x:randomNum(1000)-500,y:randomNum(1000)-500});
   }
   else if (event.keyCode == 13){
     var input = document.getElementById("messageInput");
@@ -81,7 +80,7 @@ function recieveMessage(msg){
 }
 
 function sendMessage(input){
-  var msg = {sender:"You",text:input.value};
+  var msg = {sender:"You",text:input.value, reciever:""};
   var messageDiv = document.createElement("div");
   var messageBody = document.createElement("p");
   var messageUsername = document.createElement("p");
