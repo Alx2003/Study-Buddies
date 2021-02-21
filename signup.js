@@ -14,8 +14,18 @@ firebase.initializeApp(firebaseConfig);
 var firebaseRef = firebase.database().ref('users');
 console.log(firebaseRef);
 
+function setCookie(name){
+    document.cookie = name;
+}
+
 function createUser(){
   var name = document.getElementById("nameform").value;
   var tags = document.getElementById("tagform").value;
   firebaseRef.child(name).push(tags.split(",").toString());
+}
+
+function signUp(cName){
+  setCookie(cName);
+  createUser();
+  window.location.replace("home.html");
 }

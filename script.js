@@ -180,3 +180,13 @@ document.getElementById('map').onmousemove = function drag(event){
 function randomNum(max){
   return Math.floor(Math.random() * Math.floor(max));
 }
+
+function checkCookie() {
+  var cookie = getCookie("username");
+  if (username != "") {
+    window.location.replace("signup.html"); //Change to live link
+  } else {
+      //Read users data from database using "username"
+    }
+  }
+}
