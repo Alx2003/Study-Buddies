@@ -20,7 +20,7 @@ var mouse = {x:0,y:0};
 recieveMessage({text:"Goo goo gaa gaa",sender:"Fahim"});
 recieveMessage({text:"booga wooga",sender:"Fahim"});
 recieveMessage({text:"swigga",sender:"Fahim"});
-recieveMessage({text:"Test",sender:"Fahim"});\
+recieveMessage({text:"Test",sender:"Fahim"});
 
 
 

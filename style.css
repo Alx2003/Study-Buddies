@@ -1,3 +1,11 @@
+button {
+  height: 45px;
+  font-size: 35px;
+  outline: none;
+  border-radius: 5px;
+  color:darkgreen;
+}
+
 h1{
   font-font-family: Helvetica;
   text-align: center;
@@ -39,6 +47,7 @@ h1{
   border-left-style: hidden;
   border-bottom-style: hidden;
   background-color: lightblue;
+  font-size: 45px;
 }
 
 .message {
