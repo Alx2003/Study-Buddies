@@ -16,11 +16,11 @@ var oldPos = {x:0, y:0};
 var mousePos = 0;
 var circles = [];
 var mouse = {x:0,y:0};
-
-recieveMessage({text:"Goo goo gaa gaa",sender:"Fahim"});
-recieveMessage({text:"booga wooga",sender:"Fahim"});
-recieveMessage({text:"swigga",sender:"Fahim"});
-recieveMessage({text:"Test",sender:"Fahim"});
+var circleX = 0;
+var circleY = 0;
+var name = "You";
+var selectProfile;
+window.setInterval(function(){checkMessage()}, 1000);
 
 
 
@@ -28,6 +28,36 @@ recieveMessage({text:"Test",sender:"Fahim"});
 firebase.initializeApp(firebaseConfig);
  // Database reference
 var firebaseRef = firebase.database().ref('messages');
+
+var url = "https://us-central1-study-buddies-88.cloudfunctions.net/helloWorld?task=getpeople";
+
+var users = JSON.parse(httpGet(url)).People;
+
+for (var i = 0;i < users.length;i++){
+  circles.push(createProfile({name:users[i].name,tags:users[i].tag}));
+}
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.response;
+}
+
+function checkMessage(){
+  var messages = JSON.parse(httpGet("http://localhost:5001/study-buddies-88/us-central1/helloWorld?task=updatemessage")).messages;
+  for (var i = 0; i<messages.length;i++){
+    var m = JSON.parse(messages[i].message);
+    console.log(m);
+    if (m.sender == name){
+      sentMe({text:m.text});
+    }
+    else if (m.sender == selectProfile){
+      recieveMessage(m);
+    }
+  }
+}
 
 document.addEventListener('keydown', function (event){
   var box = document.getElementById('square');
@@ -79,6 +109,30 @@ function recieveMessage(msg){
   document.getElementById('messages').appendChild(messageDiv);
 }
 
+function sentMe(input){
+  var msg = {sender:"You",text:input.text, reciever:""};
+  var messageDiv = document.createElement("div");
+  var messageBody = document.createElement("p");
+  var messageUsername = document.createElement("p");
+
+  messageDiv.className="message";
+
+  messageUsername.innerHTML = msg.sender;
+  messageUsername.style.fontWeight = "bold";
+  messageUsername.style.top = "0px";
+
+  messageBody.innerHTML = msg.text;
+  messageBody.style.top = "20px";
+  messageUsername.style.left = "auto";
+  messageUsername.style.right = "0px";
+  messageBody.style.left = "auto";
+  messageBody.style.right = "0px";
+
+  messageDiv.appendChild(messageUsername);
+  messageDiv.appendChild(messageBody);
+  document.getElementById('messages').appendChild(messageDiv);
+}
+
 function sendMessage(input){
   var msg = {sender:"You",text:input.value, reciever:""};
   var messageDiv = document.createElement("div");
@@ -105,20 +159,27 @@ function sendMessage(input){
   input.value=""
 }
 
-function createProfile(pos){
-  image = {img:document.createElement("img"), x:0,y:0,scale:50};
+function createProfile(data){
+  image = {img:document.createElement("img"), x:circleX,y:circleY,scale:50,name:data.name,tags:data.tags};
+  circleX+=50;
+  if (circleX > 200){
+    circleX = 0;
+    circleY+=50;
+  }
   image.img.src = "https://i.redd.it/lhogxfo3rf151.png";
   image.img.draggable = false;
   image.img.style.position = "absolute";
   image.img.style.width = image.scale+"px";
   image.img.style.height = "auto";
-  image.x = pos.x;
-  image.y = pos.y;
   image.img.style.left = image.x+"px";
   image.img.style.top = image.y+"px";
+  console.log(image.x+" "+image.y);
   image.img.onclick = function(){profileClicked(this);};
   image.img.id = "C"+circles.length;
   circles.push(image);
+  var name = document.createElement("p");
+  name.innerHTML = image.name;
+  image.img.appendChild(name);
   document.getElementById("square").appendChild(image.img);
 
   return image;
@@ -186,7 +247,6 @@ function checkCookie() {
   if (username != "") {
     window.location.replace("signup.html"); //Change to live link
   } else {
-      //Read users data from database using "username"
-    }
+    name = cookie;
   }
 }
