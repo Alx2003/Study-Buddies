@@ -15,7 +15,8 @@ var firebaseRef = firebase.database().ref('users');
 console.log(firebaseRef);
 
 function setCookie(name){
-    document.cookie = name;
+    console.log(name);
+    document.cookie = "username="+name;
 }
 
 function createUser(){
@@ -24,8 +25,9 @@ function createUser(){
   firebaseRef.child(name).push(tags.split(",").toString());
 }
 
-function signUp(cName){
-  setCookie(cName);
+function signUp(){
+  var name = document.getElementById("nameform").value;
+  setCookie(name);
   createUser();
   window.location.replace("home.html");
 }

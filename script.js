@@ -46,7 +46,11 @@ function httpGet(theUrl)
 }
 
 function checkMessage(){
-  var messages = JSON.parse(httpGet("http://localhost:5001/study-buddies-88/us-central1/helloWorld?task=updatemessage")).messages;
+  var messageBox = document.getElementById('messages');
+  while (messageBox.firstChild){
+    messageBox.removeChild(messageBox.lastChild);
+  }
+  var messages = JSON.parse(httpGet("https://us-central1-study-buddies-88.cloudfunctions.net/helloWorld?task=updatemessage")).messages;
   for (var i = 0; i<messages.length;i++){
     var m = JSON.parse(messages[i].message);
     console.log(m);
@@ -134,7 +138,7 @@ function sentMe(input){
 }
 
 function sendMessage(input){
-  var msg = {sender:"You",text:input.value, reciever:""};
+  var msg = {sender:name,text:input.value, reciever:selectProfile};
   var messageDiv = document.createElement("div");
   var messageBody = document.createElement("p");
   var messageUsername = document.createElement("p");
@@ -186,12 +190,10 @@ function createProfile(data){
 }
 
 function profileClicked(profileImg){
-  text.innerHTML = profileImg.id;
   profileImg.style.backgroundColor = "red";
-  var profile = circles[parseInt((profileImg.id).slice(1))];
-
-
-
+  selectProfile = circles[parseInt((profileImg.id).slice(1))].name;
+  text.innerHTML = selectProfile;
+  document.getElementById("messageBox").style.display = "block";
 }
 
 function moveProfile(profile, pos){
@@ -242,16 +244,4 @@ function randomNum(max){
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-"username" = document.cookie;
-function getCookie("username") {
-  return "username";
-}
-
-function checkCookie() {
-  var cookie = getCookie("username");
-  if (username == "" || username == null) {
-    window.location.replace("signup.html"); //Change to live link
-  } else {
-    name = cookie;
-  }
-}
+username = document.cookie;
