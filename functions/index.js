@@ -1,15 +1,13 @@
-// The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
-const functions = require('firebase-functions');
-
-// The Firebase Admin SDK to access Firestore.
+const functions = require("firebase-functions");
 const admin = require('firebase-admin');
-admin.initializeApp();
 
-
-var http = require('http');
 var url = require('url');
+admin.initializeApp({
+  credential: admin.credential.cert("servicekey.json"),
+  databaseURL: "https://study-buddies-88-default-rtdb.firebaseio.com"
+});
 
-function all(req, res) {
+exports.helloWorld = functions.https.onRequest((req, res) => {
   res.setHeader('Content-Type', 'application/json');
   var q = url.parse(req.url,true).query;
   var data;
@@ -29,7 +27,7 @@ function all(req, res) {
   }
   res.write(JSON.stringify(data,null,3)+"");
   res.end();
-}
+});
 
 function createUser(data){
   return {Username:data.username};
