@@ -5,23 +5,22 @@
     <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
-    <script src="signup.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+    <script src="signup.js"></script>
   </head>
   <body>
     <div id = "background" style="background-color:lightgreen">
       <h1 style="font-family:Helvetica">Welcome to Study Buddies!</h1>
       <div class="userform">
         <p>Enter Your Username:</p>
-        <input></input>
+        <input id ="nameform"></input>
       </div>
       <div class="userform" id="tagBox">
         <p>Enter Some Tags:</p>
-        <input></input>
+        <input id="tagform"></input>
       <button onclick="createUser()">Sign Up</button>
   </body>
 

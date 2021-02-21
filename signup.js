@@ -14,7 +14,8 @@ firebase.initializeApp(firebaseConfig);
 var firebaseRef = firebase.database().ref('users');
 console.log(firebaseRef);
 
-function createUser(name, tags){
-  firebaseRef.push(name);
+function createUser(){
+  var name = document.getElementById("nameform").value;
+  var tags = document.getElementById("tagform").value;
   firebaseRef.child(name).push(tags.split(",").toString());
 }
