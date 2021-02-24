@@ -1,14 +1,4 @@
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDEoiQ8N9DNsakYRCOgHiClO6J_WbhRs2M",
-  authDomain: "study-buddies-88.firebaseapp.com",
-  projectId: "study-buddies-88",
-  storageBucket: "study-buddies-88.appspot.com",
-  messagingSenderId: "532691385679",
-  appId: "1:532691385679:web:38a0424b56ae1b650e193a",
-  measurementId: "G-718FP2KPNC"
-};
-
 var text = document.getElementById('output');
 var pos = {x:"none",y:0};
 var offset = {x:0,y:0};
@@ -25,7 +15,7 @@ window.setInterval(function(){checkMessage()}, 1000);
 
 
 // Initialize Firebase  **************WRITTING INTO THE DATABASE********************
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebase.credential.applicationDefault());
  // Database reference
 var firebaseRef = firebase.database().ref('messages');
 
