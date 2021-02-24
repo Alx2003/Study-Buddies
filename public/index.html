@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="style.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+    <script src="script.js" defer ></script>
+    <script>
+    function getCookie(username) {
+      return document.cookie;
+    }
+
+    function checkCookie() {
+      var cookie = getCookie("username");
+      if (cookie == "" || cookie == null) {
+        console.log("No cookie");
+      //  window.location.replace("signup.html"); //Change to live link
+      } else {
+        name = cookie;
+        console.log("Name is: "+name);
+      }
+    }
+    </script>
+  </head>
+  <body onload="checkCookie()">
+    <div id="messageBox" style="display:none">
+      <div id = "messages">
+      </div>
+      <div id="textBox">
+        <input placeholder=" Send Message" id="messageInput"></input>
+      </div>
+    </div>
+    <div id="map">
+      <div id="square">
+      </div>
+      <p id="output"></p>
+    </div>
+  </body>
+
+</html>
