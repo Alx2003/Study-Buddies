@@ -29,7 +29,7 @@ firebase.initializeApp(firebaseConfig);
  // Database reference
 var firebaseRef = firebase.database().ref('messages');
 
-var url = "https://us-central1-study-buddies-88.cloudfunctions.net/helloWorld?task=getpeople";
+var url = "https://us-central1-study-buddies-88.cloudfunctions.net/getpeople";
 
 var users = JSON.parse(httpGet(url)).People;
 
@@ -50,10 +50,9 @@ function checkMessage(){
   while (messageBox.firstChild){
     messageBox.removeChild(messageBox.lastChild);
   }
-  var messages = JSON.parse(httpGet("https://us-central1-study-buddies-88.cloudfunctions.net/helloWorld?task=updatemessage")).messages;
+  var messages = JSON.parse(httpGet("https://us-central1-study-buddies-88.cloudfunctions.net/updatemessage")).messages;
   for (var i = 0; i<messages.length;i++){
     var m = JSON.parse(messages[i].message);
-    console.log(m);
     if (m.sender == name){
       sentMe({text:m.text});
     }

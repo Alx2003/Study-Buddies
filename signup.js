@@ -22,12 +22,21 @@ function setCookie(name){
 function createUser(){
   var name = document.getElementById("nameform").value;
   var tags = document.getElementById("tagform").value;
-  firebaseRef.child(name).push(tags.split(",").toString());
+  var base = "https://us-central1-study-buddies-88.cloudfunctions.net/createuser?name=";
+  console.log(httpGet(base+name+"&tags="+encodeURIComponent(tags)));
 }
 
 function signUp(){
   var name = document.getElementById("nameform").value;
   setCookie(name);
   createUser();
-  window.location.replace("home.html");
+  //window.location.replace("home.html");
+}
+
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.response;
 }
